@@ -2,7 +2,7 @@
 
 pkgname=osbuild-composer
 pkgdesc='An HTTP service for building bootable OS images'
-pkgver=104
+pkgver=105
 pkgrel=1
 url="https://www.osbuild.org"
 arch=(x86_64)
@@ -12,7 +12,7 @@ makedepends=('go' 'systemd')
 checkdepends=('go')
 optdepends=()
 source=($pkgname-$pkgver.tar.gz::https://github.com/osbuild/osbuild-composer/archive/refs/tags/v${pkgver}.tar.gz)
-sha256sums=('df0875205e398fd9ea79d23ea8d5b0402e96af5fa57cc22eb22dfa6505658f19')
+sha256sums=('c5919ad55da2243ecd9e8e4e12a9583df769768d50351bc3c169452d070ee884')
 
 prepare() {
   cd $pkgname-$pkgver
@@ -21,9 +21,9 @@ prepare() {
   # Arch doesn't use /usr/libexec: edit service files
   sed -i 's,/usr/libexec,/usr/lib,g' distribution/osbuild-*.service
 
-  # configure path to dnf-json
+  # configure path to depsolver
   cat > osbuild-composer.toml << EOF
-dnf-json = "/usr/lib/osbuild-composer/dnf-json"
+dnf-json = "/usr/lib/osbuild/osbuild-depsolve-dnf"
 EOF
 }
 
@@ -42,7 +42,6 @@ package() {
   # binaries
   install -Dm755 "build/osbuild-composer" "${pkgdir}/usr/lib/osbuild-composer/osbuild-composer"
   install -Dm755 "build/osbuild-worker"   "${pkgdir}/usr/lib/osbuild-composer/osbuild-worker"
-  install -Dm755 "dnf-json"               "${pkgdir}/usr/lib/osbuild-composer/dnf-json"
 
   # sysusers
   install -Dm644 distribution/osbuild-composer.conf "${pkgdir}/usr/lib/sysusers.d/osbuild-composer.conf"
@@ -67,9 +66,9 @@ package() {
 check() {
   cd $pkgname-$pkgver
 
-  # Some dnf-json tests require an initialised rpmdb (at the default location
+  # Some depsolve tests require an initialised rpmdb (at the default location
   # /var/lib/rpm) but we need root to initialise it.
-  # Skip dnf-json tests that require it if it's not found.
+  # Skip depsolve tests that require it if it's not found.
   skips=""
   if ! rpm -qa &> /dev/null; then
     skips="TestErrorRepoInfo|TestDepsolver"
