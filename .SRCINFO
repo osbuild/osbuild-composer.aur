@@ -1,6 +1,6 @@
 pkgbase = osbuild-composer
 	pkgdesc = An HTTP service for building bootable OS images
-	pkgver = 121
+	pkgver = 122
 	pkgrel = 1
 	url = https://www.osbuild.org
 	arch = x86_64
@@ -13,7 +13,7 @@ pkgbase = osbuild-composer
 	depends = osbuild
 	depends = systemd
 	depends = btrfs-progs
-	source = osbuild-composer-121.tar.gz::https://github.com/osbuild/osbuild-composer/archive/refs/tags/v121.tar.gz
-	sha256sums = ac320efbb67ed2bba88cd0cc3efec29ec1070a3922e0e5623edd6edd5f86f051
+	source = osbuild-composer-122.tar.gz::https://github.com/osbuild/osbuild-composer/archive/refs/tags/v122.tar.gz
+	sha256sums = 6ab0ace70ab2dd6f35d3ace9e7e8f0bdfc990ccf7d00b7b73c8dfa36dba009f3
 
 pkgname = osbuild-composer
