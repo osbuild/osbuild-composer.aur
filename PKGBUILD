@@ -2,7 +2,7 @@
 
 pkgname=osbuild-composer
 pkgdesc='An HTTP service for building bootable OS images'
-pkgver=134
+pkgver=135
 pkgrel=1
 url="https://www.osbuild.org"
 arch=(x86_64)
@@ -12,7 +12,7 @@ makedepends=('go' 'systemd')
 checkdepends=('go')
 optdepends=()
 source=($pkgname-$pkgver.tar.gz::https://github.com/osbuild/osbuild-composer/archive/refs/tags/v${pkgver}.tar.gz)
-sha256sums=('e02bd7a0ced1c31f7876fb4e6ba765240017eb21bc23ffb9a1fb59d398e57bf6')
+sha256sums=('92ef1ba09ab7b67e10f8a393dc92530794279c91ca5f2438f1fd01e3864da187')
 
 prepare() {
   cd $pkgname-$pkgver
@@ -52,8 +52,8 @@ package() {
   install -Dm644 distribution/*.socket "${pkgdir}/usr/lib/systemd/system/"
 
   # repositories
-  mkdir -p "${pkgdir}/usr/share/osbuild-composer/repositories"
-  install -Dm644 repositories/*.json "${pkgdir}/usr/share/osbuild-composer/repositories"
+  # mkdir -p "${pkgdir}/usr/share/osbuild-composer/repositories"
+  # install -Dm644 repositories/*.json "${pkgdir}/usr/share/osbuild-composer/repositories"
 
   # config file
   mkdir -p "${pkgdir}/etc/osbuild-composer/"
