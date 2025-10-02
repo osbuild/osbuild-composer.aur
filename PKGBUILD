@@ -2,7 +2,7 @@
 
 pkgname=osbuild-composer
 pkgdesc='An HTTP service for building bootable OS images'
-pkgver=151
+pkgver=152
 pkgrel=1
 url="https://www.osbuild.org"
 arch=(x86_64)
@@ -12,7 +12,7 @@ makedepends=('go' 'systemd')
 checkdepends=('go')
 optdepends=()
 source=($pkgname-$pkgver.tar.gz::https://github.com/osbuild/osbuild-composer/archive/refs/tags/v${pkgver}.tar.gz)
-sha256sums=('e42474cb7f5310950e8c3b3128e797372a2ac1037b2e48fd2052c886c6becbdf')
+sha256sums=('233b156ac5a552f7bdade8b278ef6607576a0ce0cfcb0bd77e4460caa498ce7a')
 
 prepare() {
   cd $pkgname-$pkgver
@@ -81,4 +81,3 @@ check() {
     echo "WARNING: Some tests were skipped because they require an initialised rpmdb"
   fi
 }
-
